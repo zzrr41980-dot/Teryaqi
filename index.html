@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تِرياقي - نظام مراقبة الدواء الذكي</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0d9488 0%, #065f46 50%, #064e3b 100%);
+        }
+        
+        .card-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        /* تأثير النبض الأحمر للفائت */
+        
+        .pulse-alert {
+            animation: pulse-red 2s infinite;
+            border-radius: 12px;
+        }
+        
+        @keyframes pulse-red {
+            0% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 12px rgba(239, 68, 68, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
+        
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+
+<body class="h-full gradient-bg overflow-auto">
+    <div class="min-h-full w-full px-4 sm:px-8">
+
+        <header class="max-w-7xl mx-auto py-6 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center float-animation">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+                </div>
+                <div>
+                    <h1 class="text-3xl font-extrabold text-white">تِرياقي</h1>
+                    <p class="text-emerald-200 text-sm">نظام مراقبة الدواء الذكي</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 bg-white/10 px-4 py-2 rounded-full border border-white/20">
+                <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                <span class="text-white text-sm font-medium">المستشعر متصل</span>
+            </div>
+        </header>
+
+        <section class="max-w-7xl mx-auto mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="card-glass rounded-2xl p-5 shadow-xl flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 text-sm">إجمالي الأدوية</p>
+                    <p id="total-medicines" class="text-3xl font-bold text-gray-800">0</p>
+                </div>
+                <div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center text-xl">📋</div>
+            </div>
+            <div class="card-glass rounded-2xl p-5 shadow-xl flex items-center justify-between text-green-600">
+                <div>
+                    <p class="text-gray-500 text-sm">تم تناوله</p>
+                    <p id="taken-count" class="text-3xl font-bold">0</p>
+                </div>
+                <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+            </div>
+            <div class="card-glass rounded-2xl p-5 shadow-xl flex items-center justify-between text-amber-600">
+                <div>
+                    <p class="text-gray-500 text-sm">في الانتظار</p>
+                    <p id="pending-count" class="text-3xl font-bold">0</p>
+                </div>
+                <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 8v4l3 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+            </div>
+            <div class="card-glass rounded-2xl p-5 shadow-xl flex items-center justify-between text-red-600">
+                <div>
+                    <p class="text-gray-500 text-sm">فائت</p>
+                    <p id="missed-count" class="text-3xl font-bold">0</p>
+                </div>
+                <div class="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center pulse-alert">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                </div>
+            </div>
+        </section>
+
+        <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 pb-12">
+            <div class="lg:col-span-1">
+                <div class="card-glass rounded-3xl p-6 shadow-xl">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">إضافة دواء جديد</h2>
+                    <form id="medicine-form" class="space-y-4">
+                        <input type="text" id="patient-name" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-emerald-500 outline-none transition-all" placeholder="اسم المريض">
+
+                        <input list="medicine-options" id="medicine-name" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-emerald-500 outline-none transition-all" placeholder="اختر أو اكتب اسم الدواء">
+                        <datalist id="medicine-options">
+                            <option value="الأسبرين">
+                            <option value="الإيبوبروفين">
+                            <option value="الباراسيتامول">
+                        </datalist>
+
+                        <input type="text" id="dosage" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-emerald-500 outline-none transition-all" placeholder="مثال: حبة واحدة - 500 ملغ">
+                        <input type="time" id="medicine-time" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-emerald-500 outline-none transition-all">
+                        <button type="submit" class="w-full py-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold shadow-lg transition-all transform hover:-translate-y-1">إضافة الدواء</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <div class="card-glass rounded-3xl p-6 shadow-xl min-h-[400px]">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6 flex justify-between items-center">
+                        <span>جدول الأدوية والمراقبة</span>
+                        <span class="text-xs font-normal text-gray-400 italic">تحديث مباشر</span>
+                    </h2>
+                    <div id="medicines-list" class="space-y-3">
+                        <div id="empty-state" class="text-center py-20 flex flex-col items-center gap-4">
+                            <div class="text-6xl opacity-20">📋</div>
+                            <p class="text-gray-400 font-medium">لا توجد أدوية مسجلة حالياً</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="max-w-7xl mx-auto py-8 text-center border-t border-white/10">
+            <p class="text-emerald-100 text-sm opacity-80">©️ 2026 تِرياقي - جميع الحقوق محفوظة</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
