@@ -75,4 +75,44 @@ function renderMedicines() {
     `;
         container.appendChild(div);
     });
+} // تعديل دالة الإضافة لتشمل الخانات الجديدة
+document.getElementById('medicine-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const newMed = {
+        id: Date.now(),
+        patient_name: document.getElementById('patient-name').value,
+        medicine_name: document.getElementById('medicine-name').value,
+        dosage: document.getElementById('dosage').value,
+        time: document.getElementById('medicine-time').value,
+        disease: document.getElementById('disease-type').value, // إضافة الحالة
+        notes: document.getElementById('personal-notes').value, // إضافة الملاحظات
+        status: 'pending'
+    };
+
+    medicines.unshift(newMed);
+    localStorage.setItem('myMedicines', JSON.stringify(medicines));
+    renderMedicines();
+    updateStats();
+    this.reset();
+});
+
+// تعديل العرض ليظهر كل شيء في الكرت تحت
+function renderMedicines() {
+    const container = document.getElementById('medicines-list');
+    container.innerHTML = medicines.map(med => `
+        <div class="p-4 mb-3 rounded-2xl bg-white shadow-sm border-r-8 border-emerald-500 flex flex-col gap-2">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h3 class="font-bold text-gray-800">${med.medicine_name}</h3>
+                    <p class="text-[10px] text-gray-500">${med.patient_name} - ${med.dosage}</p>
+                </div>
+                <div class="text-left font-bold text-emerald-600 text-sm">${med.time}</div>
+            </div>
+            <span class="text-[9px] w-fit px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 font-bold">${med.disease}</span>
+            <div class="bg-gray-50 p-2 rounded-lg border-t mt-1">
+                <p class="text-[10px] text-emerald-800 leading-relaxed font-bold italic">📝 ملاحظات: ${med.notes || 'لا توجد'}</p>
+            </div>
+        </div>
+    `).join('');
 }
