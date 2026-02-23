@@ -1,13 +1,6 @@
-// روابط الصور للأدوية المعروفة
-const medicineImages = {
-    'الأسبرين': 'https://cdn-icons-png.flaticon.com/512/883/883360.png',
-    'الإيبوبروفين': 'https://cdn-icons-png.flaticon.com/512/883/883360.png',
-    'الباراسيتامول': 'https://cdn-icons-png.flaticon.com/512/883/883360.png'
-};
-
-let medicines = [];
-
-// تحديث الإحصائيات العلوية
+let medicines = JSON.parse(localStorage.getItem('myMedicines')) || [];
+// هذا السطر يطلب من المتصفح جلب الأدوية المحفوظة سابقاً
+//تحديث الاحصائيات العلوية
 function updateStats() {
     document.getElementById('total-medicines').textContent = medicines.length;
     document.getElementById('taken-count').textContent = medicines.filter(m => m.status === 'taken').length;
@@ -29,7 +22,6 @@ document.getElementById('medicine-form').addEventListener('submit', function(e) 
         newOption.value = medName;
         datalist.appendChild(newOption);
     }
-
     const newMed = {
         patient_name: document.getElementById('patient-name').value,
         medicine_name: medName,
@@ -39,6 +31,10 @@ document.getElementById('medicine-form').addEventListener('submit', function(e) 
     };
 
     medicines.push(newMed);
+
+    // سطر الحفظ مكانه الصحيح هنا بعد إضافة الدواء للقائمة
+    localStorage.setItem('myMedicines', JSON.stringify(medicines));
+
     renderMedicines();
     updateStats();
     this.reset();

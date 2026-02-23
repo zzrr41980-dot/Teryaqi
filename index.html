@@ -111,23 +111,17 @@
                 </div>
             </div>
         </section>
-
         <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 pb-12">
             <div class="lg:col-span-1">
                 <div class="card-glass rounded-3xl p-6 shadow-xl">
                     <h2 class="text-xl font-bold text-gray-800 mb-6"> بيانات المريض</h2>
                     <form id="medicine-form" class="space-y-4">
                         <input type="text" id="patient-name" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-emerald-500 outline-none transition-all" placeholder="اسم المريض">
-
-                        <input list="medicine-options" id="medicine-name" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-emerald-500 outline-none transition-all" placeholder="اختر أو اكتب اسم الدواء">
-                        <datalist id="medicine-options">
-                            <option value="الأسبرين">
-                            <option value="الإيبوبروفين">
-                            <option value="الباراسيتامول">
-                        </datalist>
-
+                        <input list="medicine-options" id="medicine-name" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-emerald-500 outline-none transition-all" placeholder="  اكتب اسم الدواء">
+                        <datalist id="medicine-options"></datalist>
                         <input type="text" id="dosage" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-emerald-500 outline-none transition-all" placeholder="مثال: حبة واحدة - 500 ملغ">
                         <input type="time" id="medicine-time" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-emerald-500 outline-none transition-all">
+                        <datalist id="medicine-options"></datalist>
                         <button type="submit" class="w-full py-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold shadow-lg transition-all transform hover:-translate-y-1">إضافة الدواء</button>
                     </form>
                 </div>
