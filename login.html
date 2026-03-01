@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>تِرياقي - تسجيل الدخول</title>
+
+<style>
+body {
+    font-family: 'Tajawal', sans-serif;
+    background: linear-gradient(135deg, #0d9488, #065f46);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    width: 380px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+    position: relative;
+}
+
+h2 {
+    color: #065f46;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #0d9488;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #065f46;
+}
+
+.toggle {
+    margin-top: 15px;
+    cursor: pointer;
+    color: #0d9488;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+.message {
+    margin-top: 15px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2 id="formTitle">تسجيل الدخول</h2>
+
+    <!-- الاسم يظهر فقط في التسجيل -->
+    <input type="text" id="full_name" placeholder="الاسم الكامل" class="hidden">
+    <input type="text" id="phone" placeholder="رقم الجوال" class="hidden">
+
+    <input type="email" id="email" placeholder="البريد الإلكتروني">
+    <input type="password" id="password" placeholder="كلمة المرور">
+
+    <button onclick="submitForm()" id="mainButton">تسجيل الدخول</button>
+
+    <div class="toggle" onclick="toggleMode()" id="toggleText">
+        ليس لديك حساب؟ إنشاء حساب
+    </div>
+
+    <div class="message" id="message"></div>
+
+</div>
+
+<script>
+
+let isLogin = true;
+
+function toggleMode() {
+
+    const fullName = document.getElementById("full_name");
+    const phone = document.getElementById("phone");
+    const title = document.getElementById("formTitle");
+    const button = document.getElementById("mainButton");
+    const toggleText = document.getElementById("toggleText");
+    const message = document.getElementById("message");
+
+    message.innerText = "";
+
+    if(isLogin) {
+        fullName.classList.remove("hidden");
+        phone.classList.remove("hidden");
+        title.innerText = "إنشاء حساب";
+        button.innerText = "إنشاء الحساب";
+        toggleText.innerText = "لديك حساب؟ تسجيل الدخول";
+        isLogin = false;
+    } else {
+        fullName.classList.add("hidden");
+        phone.classList.add("hidden");
+        title.innerText = "تسجيل الدخول";
+        button.innerText = "تسجيل الدخول";
+        toggleText.innerText = "ليس لديك حساب؟ إنشاء حساب";
+        isLogin = true;
+    }
+}
+
+function submitForm() {
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const full_name = document.getElementById("full_name").value;
+    const phone = document.getElementById("phone").value;
+    const messageDiv = document.getElementById("message");
+
+    if(isLogin) {
+
+        fetch("http://localhost/triyaqi-api/index.php/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+        })
+        .then(res => res.json())
+        .then(data => {
+
+            if(data.message === "Login Successful") {
+                messageDiv.style.color = "green";
+                messageDiv.innerText = "تم تسجيل الدخول بنجاح ✅";
+
+                localStorage.setItem("user_id", data.user_id);
+
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 1500);
+
+            } else {
+                messageDiv.style.color = "red";
+                messageDiv.innerText = data.message;
+            }
+        });
+
+    } else {
+
+        fetch("http://localhost/triyaqi-api/index.php/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ full_name, email, password, phone })
+        })
+        .then(res => res.json())
+        .then(data => {
+
+            if(data.message === "User Registered Successfully") {
+                messageDiv.style.color = "green";
+                messageDiv.innerText = "تم إنشاء الحساب بنجاح 🎉";
+                toggleMode();
+            } else {
+                messageDiv.style.color = "red";
+                messageDiv.innerText = data.message;
+            }
+        });
+
+    }
+}
+</script>
+
+</body>
+</html>

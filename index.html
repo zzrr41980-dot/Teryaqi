@@ -122,90 +122,34 @@
                         <input type="text" id="dosage" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-emerald-500 outline-none transition-all" placeholder="مثال: حبة واحدة - 500 ملغ">
                         <input type="time" id="medicine-time" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-emerald-500 outline-none transition-all">
                         <datalist id="medicine-options"></datalist>
+                        <button type="submit" class="w-full py-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold shadow-lg transition-all transform hover:-translate-y-1">إضافة الدواء</button>
                     </form>
-                    <select id="disease-type" class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-emerald-500 outline-none transition-all text-sm font-medium text-gray-700">
-    <option value="" disabled selected>-- اختر الحالة المرضية --</option>
-    <option value="ضغط الدم">مرض ضغط الدم</option>
-    <option value="خمول الغدة">خمول الغدة الدرقية</option>
-    <option value="هشاشة العظام"> هشاشة العظام</option>
-    <option value="الكوليسترول"> ارتفاع الكوليسترول</option>
-    <option value="سيولة الدم"> أمراض سيولة الدم</option>
-    <option value="السكري">  المرض السكري النوع الثاني</option>
-    <option value="عام">أخرى / عام</option>
-</select>
-                    <textarea id="personal-notes" class="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-emerald-500 outline-none transition-all text-sm" placeholder="اكتب تعليمات الطبيب أو ملاحظاتك هنا..." rows="3"></textarea>
-                    <button type="submit" class="w-full py-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold shadow-lg transition-all transform hover:-translate-y-1">إضافة الدواء</button>
                 </div>
             </div>
 
             <div class="lg:col-span-2">
-                <div class="mb-10">
-                    <h2 class="text-white text-xl font-bold mb-6 flex items-center gap-2">🛡️ دليل الاحترازات العامة</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-
-                        <div class="bg-white/95 p-4 rounded-2xl shadow-md border-r-4 border-blue-500">
-                            <h4 class="font-bold text-blue-900 text-sm">1. ضغط الدم</h4>
-                            <p class="text-[11px] text-gray-600 mt-1">• مدرات البول: صباحاً لتجنب الأرق. <br> • تجنب الجريب فروت مع العلاج.</p>
-                        </div>
-
-                        <div class="bg-white/95 p-4 rounded-2xl shadow-md border-r-4 border-purple-500">
-                            <h4 class="font-bold text-purple-900 text-sm">2. خمول الغدة</h4>
-                            <p class="text-[11px] text-gray-600 mt-1">• الثايروكسين: فجراً على الريق. <br> • فصل الكالسيوم عنه 4 ساعات.</p>
-                        </div>
-
-                        <div class="bg-white/95 p-4 rounded-2xl shadow-md border-r-4 border-emerald-500">
-                            <h4 class="font-bold text-emerald-900 text-sm">3. السكري</h4>
-                            <p class="text-[11px] text-gray-600 mt-1">• الميتفورمين: بعد الأكل مباشرة. <br> • فحص السكر قبل جرعة الأنسولين.</p>
-                        </div>
-
-                        <div class="bg-white/95 p-4 rounded-2xl shadow-md border-r-4 border-red-500">
-                            <h4 class="font-bold text-red-900 text-sm">4. سيولة الدم</h4>
-                            <p class="text-[11px] text-gray-600 mt-1">• الالتزام بنفس الوقت يومياً. <br> • مراقبة أي نزيف أو كدمات مفاجئة.</p>
-                        </div>
-
-                        <div class="bg-white/95 p-4 rounded-2xl shadow-md border-r-4 border-amber-500">
-                            <h4 class="font-bold text-amber-900 text-sm">5. الكوليسترول</h4>
-                            <p class="text-[11px] text-gray-600 mt-1">• الستاتينات: يفضل تناولها مساءً. <br> • تقليل الدهون المشبعة في الأكل.</p>
-                        </div>
-
-                        <div class="bg-white/95 p-4 rounded-2xl shadow-md border-r-4 border-cyan-500">
-                            <h4 class="font-bold text-cyan-900 text-sm">6. الربو</h4>
-                            <p class="text-[11px] text-gray-600 mt-1">• البخاخ: غسل الفم جيداً بعده. <br> • بخاخ الطوارئ متاح دائماً معك.</p>
-                        </div>
-
-                        <div class="bg-white/95 p-4 rounded-2xl shadow-md border-r-4 border-orange-500">
-                            <h4 class="font-bold text-orange-900 text-sm">7. هشاشة العظام</h4>
-                            <p class="text-[11px] text-gray-600 mt-1">• الكالسيوم: يفضل مع وجبة الطعام. <br> • البقاء مستقيماً بعد الجرعة بـ30د.</p>
-                        </div>
-
-                        <div class="bg-white/95 p-4 rounded-2xl shadow-md border-r-4 border-rose-500">
-                            <h4 class="font-bold text-rose-900 text-sm">8. نقص الحديد</h4>
-                            <p class="text-[11px] text-gray-600 mt-1">• مع فيتامين C لزيادة الامتصاص. <br> • تجنب الشاي والقهوة لمدة ساعتين.</p>
+                <div class="card-glass rounded-3xl p-6 shadow-xl min-h-[400px]">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6 flex justify-between items-center">
+                        <span>جدول الأدوية والمراقبة</span>
+                        <span class="text-xs font-normal text-gray-400 italic">تحديث مباشر</span>
+                    </h2>
+                    <div id="medicines-list" class="space-y-3">
+                        <div id="empty-state" class="text-center py-20 flex flex-col items-center gap-4">
+                            <div class="text-6xl opacity-20">📋</div>
+                            <p class="text-gray-400 font-medium">لا توجد أدوية مسجلة حالياً</p>
                         </div>
                     </div>
                 </div>
-                <div class="lg:col-span-2 space-y-6">
-
-                    <div class="card-glass rounded-3xl p-6 shadow-xl min-h-[400px] w-full">
-                        <h2 class="text-xl font-bold text-gray-800 mb-6 flex justify-between items-center">
-                            <span>📅 جدول الأدوية والمراقبة</span>
-                            <span class="text-xs font-normal text-gray-400 italic">تحديث مباشر</span>
-                        </h2>
-
-                        <div id="medicines-list" class="space-y-3">
-                            <div id="empty-state" class="text-center py-20 flex flex-col items-center gap-4">
-                                <div class="text-6xl opacity-20">📋</div>
-                                <p class="text-gray-400 font-medium">لا توجد أدوية مسجلة حالياً</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
         </main>
+
         <footer class="max-w-7xl mx-auto py-8 text-center border-t border-white/10">
             <p class="text-emerald-100 text-sm opacity-80"> 2026 تِرياقي - جميع الحقوق محفوظة</p>
         </footer>
-        </div>
-        <script src="script.js"></script>
+    </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
+
+
